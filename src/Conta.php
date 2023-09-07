@@ -4,12 +4,21 @@ class Conta {
     private string $cpfTitular;
     private string $nomeTitular;
     private float $saldo;
+    private static $numeroContas = 0;
 
     public function __construct(string $nomeTitular, string $cpfTitular)
     {
+        $this->validaNomeTitular($nomeTitular);
         $this->nomeTitular = $nomeTitular;
         $this->cpfTitular = $cpfTitular;
-        $this->saldo = 0;     
+        $this->saldo = 0;
+        
+        self::$numeroContas++;
+    }
+
+    public function __destruct()
+    {
+        self::$numeroContas--;
     }
 
     public function saca(float $valorASacar)
@@ -56,5 +65,17 @@ class Conta {
     public function recuperaNomeTitular() : string
     {
         return $this->nomeTitular;
+    }
+
+    private function validaNomeTitular(string $nomeTitular) : void {
+        if (strlen($nomeTitular) < 5) {
+            $this->nomeTitular = $nomeTitular;
+            exit();
+        }
+    }
+
+    public static function recuperaNumeroContas(): int
+    {
+        return self::$numeroContas;
     }
 }

@@ -19,5 +19,7 @@ echo PHP_EOL;
 echo $segundaConta->recuperaSaldo();
 echo PHP_EOL;
 echo $primeiraConta->recuperaSaldo();
+echo PHP_EOL;
+echo Conta::recuperaNumeroContas();
 
 //var_dump($primeiraConta);
